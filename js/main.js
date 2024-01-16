@@ -49,8 +49,8 @@ Vue.component('product', {
                     variantId: 2235,
                     variantColor: 'blue',
                     variantImage: "./assets/vmSocks-blue-onWhite.jpg",
-                    variantQuantity: 0,
-                    variantSale: false,
+                    variantQuantity: 10,
+                    variantSale: true,
                 }
             ],
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
@@ -60,14 +60,14 @@ Vue.component('product', {
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
         updateProduct(index) {
             this.selectedVariant = index
             console.log(index);
         },
         removeFromCart() {
-            this.cart -= 1
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
         }
     },
     computed: {
@@ -107,6 +107,18 @@ Vue.component('product-detail', {
 let app = new Vue({
     el: "#app",
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        updateCart(id){
+            this.cart.push(id);
+        },
+        removeCart(id){
+            const index = this.cart.indexOf(id);
+            if (index !== -1) {
+              this.cart.splice(index, 1);
+            }
+        }
     }
 })
