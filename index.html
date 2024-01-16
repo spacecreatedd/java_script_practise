@@ -16,14 +16,15 @@
                 <img v-bind:alt="altText" v-bind:src="image"/>
             </div>
             <div class="product-info">
-                <h1>{{ product }}</h1>
+                <h1>{{ title }}</h1>
+                <p v-if="onSale">on sale</p>
                 <p v-if="inStock">In stock</p>
                 <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
                 <p v-show="onSale">On Sale</p>
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                 </ul>
-                <div class="color-box" @mouseover="updateProduct(variant.variantImage)" :style="{ backgroundColor:variant.variantColor }" v-for="variant in variants" :key="variant.variantId"></div>
+                <div class="color-box" @mouseover="updateProduct(index)" :style="{ backgroundColor:variant.variantColor }" v-for="(variant, index) in variants" :key="variant.variantId"></div>
 
                 <ul v-for="size in sizes">
                     <li>{{ size }}</li>
