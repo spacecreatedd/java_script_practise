@@ -17,6 +17,7 @@
             </div>
             <div class="product-info">
                 <h1>{{ product }}</h1>
+                <p v-show="onSale">On Sale</p>
             </div>
             <a v-bind:href="link"> {{ linkText }}</a>
         </div>
